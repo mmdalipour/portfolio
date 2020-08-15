@@ -1,0 +1,31 @@
+.notification {
+  padding: 0.5rem 1rem;
+  background: var(--primary-color);
+  border-radius: var(--border-radius);
+  position: absolute;
+  top: 64px;
+  color: var(--primary-text-color);
+  left: 50%;
+  transform: translate(-50%, -100px);
+  opacity: 0;
+}
+
+.notification.show {
+  transition: 0.3s ease;
+  transform: translate(-50%, -100%);
+  opacity: 1;
+}
+
+.notification.hide {
+  transition: 0.3s ease;
+  transform: translate(-50%, -100px);
+  opacity: 0;
+}
+
+.notification.success {
+  background: #66bb6a !important;
+}
+
+.notification.error {
+  background: #ef5350 !important;
+}
