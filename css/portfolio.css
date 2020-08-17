@@ -30,9 +30,19 @@ a:focus {
 }
 
 /* START DROPDOWN */
+.click-away-listener {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
 .menu-root {
   position: relative;
   display: block;
+  z-index: 99999;
 }
 
 .menu {
@@ -46,7 +56,6 @@ a:focus {
   transform: scale(0);
   transform-origin: top center;
   border-radius: 0 0 var(--border-radius) var(--border-radius);
-  z-index: 99999;
 }
 
 body.dark .menu {

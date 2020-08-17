@@ -24,6 +24,10 @@ const lightOffIcon = () => {
     </svg>`;
 };
 
+const clickAwayListener = () => {
+  return `<div class='click-away-listener'></div>`;
+};
+
 const createElementFromHTML = (htmlString) => {
   var div = document.createElement("div");
   div.innerHTML = htmlString.trim();
@@ -34,72 +38,84 @@ const createElementFromHTML = (htmlString) => {
 
 const lightOffIconElement = createElementFromHTML(lightOffIcon());
 const lightOnIconElement = createElementFromHTML(lightOnIcon());
+const clickAwayListenerElement = createElementFromHTML(clickAwayListener());
 
-(() => {
-  const noti = new Notification("notification", { duration: 2000 });
+const noti = new Notification("notification", { duration: 2000 });
 
-  const clipboard = new ClipboardJS("#emailText");
+const clipboard = new ClipboardJS("#emailText");
 
-  clipboard.on("success", function (e) {
-    noti.show();
-    noti.setText("Copied To Clipboard");
-    noti.setVariant("success");
+clipboard.on("success", function (e) {
+  noti.show();
+  noti.setText("Copied To Clipboard");
+  noti.setVariant("success");
 
-    e.clearSelection();
-  });
+  e.clearSelection();
+});
 
-  clipboard.on("error", function (e) {
-    noti.show();
-    noti.setVariant("error");
-    noti.setText("Copied To Clipboard");
-  });
+clipboard.on("error", function (e) {
+  noti.show();
+  noti.setVariant("error");
+  noti.setText("Copied To Clipboard");
+});
 
-  // theme
-  const themeButton = document.querySelector("#switchThemeButton");
+// theme
+const themeButton = document.querySelector("#switchThemeButton");
 
-  const setDarkMode = (value) => {
-    const body = document.body;
-    const icon = themeButton.querySelector(".btn__icon");
-    const text = themeButton.querySelector("#switchText");
+const setDarkMode = (value) => {
+  const body = document.body;
+  const icon = themeButton.querySelector(".btn__icon");
+  const text = themeButton.querySelector("#switchText");
 
-    if (value) {
-      localStorage.setItem("darkMode", "true");
-      body.classList.add("dark");
+  if (value) {
+    localStorage.setItem("darkMode", "true");
+    body.classList.add("dark");
 
-      icon?.remove();
-      themeButton.insertBefore(lightOffIconElement, text);
-      text.innerHTML = "OFF";
-    } else {
-      localStorage.setItem("darkMode", "false");
-      body.classList.remove("dark");
+    icon?.remove();
+    themeButton.insertBefore(lightOffIconElement, text);
+    text.innerHTML = "OFF";
+  } else {
+    localStorage.setItem("darkMode", "false");
+    body.classList.remove("dark");
 
-      icon?.remove();
-      themeButton.insertBefore(lightOnIconElement, text);
-      text.innerHTML = "ON";
-    }
-  };
+    icon?.remove();
+    themeButton.insertBefore(lightOnIconElement, text);
+    text.innerHTML = "ON";
+  }
+};
 
-  // get current theme state
-  let darkMode = localStorage.getItem("darkMode") === "true";
-  setDarkMode(darkMode);
+// get current theme state
+let darkMode = localStorage.getItem("darkMode") === "true";
+setDarkMode(darkMode);
 
-  themeButton.addEventListener("click", () => {
-    darkMode = !darkMode;
-    if (darkMode) setDarkMode(true);
-    else setDarkMode(false);
-  });
+themeButton.addEventListener("click", () => {
+  darkMode = !darkMode;
+  if (darkMode) setDarkMode(true);
+  else setDarkMode(false);
+});
 
+const setMenuState = (value) => {
   // dropdown
-  const dropdown = document.querySelector("#resumeDropdown");
-  const menu = dropdown.querySelector(".menu");
-  let toggle = false;
-  dropdown.addEventListener("click", () => {
-    toggle = !toggle;
+  const menuPresenter = document.querySelector("#menuPresenter");
+  const menu = menuPresenter.querySelector(".menu");
 
-    if (toggle) {
-      menu.classList.add("open");
-    } else {
-      menu.classList.remove("open");
-    }
-  });
-})();
+  if (value) {
+    menu.classList.add("open");
+    menuPresenter.appendChild(clickAwayListenerElement);
+  } else {
+    menu.classList.remove("open");
+    clickAwayListenerElement.remove();
+  }
+};
+
+const dropdown = menuPresenter.querySelector(".menu-root");
+
+clickAwayListenerElement.addEventListener("click", () => {
+  setMenuState(false);
+});
+
+let toggle = false;
+dropdown.addEventListener("click", () => {
+  toggle = !toggle;
+
+  setMenuState(toggle);
+});
