@@ -1,0 +1,12 @@
+body {
+  --primary-color: #212121;
+  --primary-color-dark: #000000;
+  --secondary-color: #fdd835;
+  --secondary-color-dark: #c6a700;
+  --main-bg-color: #fafafa;
+  --light-text-color: #fafafa;
+  --dark-text-color: #212121;
+  --border-radius: 2px;
+
+  color: var(--dark-text-color);
+}

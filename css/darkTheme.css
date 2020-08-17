@@ -1,0 +1,11 @@
+body.dark {
+  --primary-color: #fafafa;
+  --primary-color-dark: #c7c7c7;
+  --secondary-color: #fff176;
+  --secondary-color-dark: #cabf45;
+  --main-bg-color: #121212;
+  --light-text-color: #fafafa;
+  --dark-text-color: #121212;
+
+  color: var(--light-text-color);
+}

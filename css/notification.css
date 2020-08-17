@@ -6,6 +6,7 @@
   top: 64px;
   color: var(--primary-text-color);
   left: 50%;
+  word-break: keep-all;
   transform: translate(-50%, -100px);
   opacity: 0;
 }
@@ -24,8 +25,10 @@
 
 .notification.success {
   background: #66bb6a !important;
+  color: #ffffff;
 }
 
 .notification.error {
   background: #ef5350 !important;
+  color: #ffffff;
 }
