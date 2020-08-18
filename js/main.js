@@ -109,11 +109,13 @@ const setMenuState = (value) => {
 
 const dropdown = menuPresenter.querySelector(".menu-root");
 
+let toggle = false;
+
 clickAwayListenerElement.addEventListener("click", () => {
+  toggle = false;
   setMenuState(false);
 });
 
-let toggle = false;
 dropdown.addEventListener("click", () => {
   toggle = !toggle;
 

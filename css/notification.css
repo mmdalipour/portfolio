@@ -9,6 +9,7 @@
   word-break: keep-all;
   transform: translate(-50%, -100px);
   opacity: 0;
+  z-index: 99999;
 }
 
 .notification.show {
